@@ -2220,6 +2220,29 @@ let profileInformationRef = firebase.database().ref('/users/' + user_id + "/prof
 profileInformationRef.on("value", function (snapshot) {
     let profileData = snapshot.val();
 
+    
+    let name = profileData.userName;
+    let userOccupation = profileData.Occupation;
+    let userDOB = profileData.DateOFBirth;
+    let userAddress = profileData.Address;
+
+    if (name !== undefined){
+        document.querySelector('#ResponsiveProfileName').textContent = name;
+    }
+
+    if (userOccupation !== undefined){
+        document.querySelector('#ResponsiveProfileOccupation').textContent = userOccupation;
+    }
+
+    if (userDOB !== undefined){
+        document.querySelector('#ResponsiveProfileDOB').textContent = userDOB;
+    }
+
+    if(userAddress !== undefined) {
+        document.querySelector('#ResponsiveProfileAddress').textContent = userAddress;
+    }
+
+
     let photoImageName = profileData.profilePhotoName;
 
     var storageRef = firebase.storage().ref();
@@ -2231,69 +2254,38 @@ profileInformationRef.on("value", function (snapshot) {
     starsRef.getDownloadURL().then(function(url) {
 
         document.querySelector('#nav_image').setAttribute('src', url);
+        document.querySelector('#ResponsiveImage').setAttribute('src', url);
 
     }).catch(function(error) {
 
         // alert("Profile image loading failed. Please upload image");
+
+        switch (error.code) {
+            case 'storage/object-not-found':
+            // File doesn't exist
+            console.log("File doesn't exist");
+            // alert("Profile image loading failed. Please upload image");
+            break;
+
+            case 'storage/unauthorized':
+            // User doesn't have permission to access the object
+            console.log("User doesn't have permission to access the object");
+            // alert("Profile image loading failed. Please upload image");
+            break;
+
+            case 'storage/canceled':
+            // User canceled the upload
+            console.log("User canceled the upload");
+            // alert("Profile image loading failed. Please upload image");
+            break;
+
+            // ...
+
+            case 'storage/unknown':
+            // Unknown error occurred, inspect the server response
+            console.log("Unknown error occurred, inspect the server response");
+            // alert("Profile image loading failed. Please upload image");
+            break;
+        }
     });
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/////Example
-// new Chart(document.getElementById("line-chart"), {
-//     type: 'line',
-//     data: {
-//       labels: [1500,1600,1700,1750,1800,1850,1900,1950,1999,2050],
-//       datasets: [{ 
-//           data: [86,114,106,106,107,111,133,221,783,2478],
-//           label: "Africa",
-//           borderColor: "#3e95cd",
-//           fill: false
-//         }, { 
-//           data: [282,350,411,502,635,809,947,1402,3700,5267],
-//           label: "Asia",
-//           borderColor: "#8e5ea2",
-//           fill: false
-//         }, { 
-//           data: [168,170,178,190,203,276,408,547,675,734],
-//           label: "Europe",
-//           borderColor: "#3cba9f",
-//           fill: false
-//         }, { 
-//           data: [40,20,10,16,24,38,74,167,508,784],
-//           label: "Latin America",
-//           borderColor: "#e8c3b9",
-//           fill: false
-//         }, { 
-//           data: [6,3,2,2,7,26,82,172,312,433],
-//           label: "North America",
-//           borderColor: "#c45850",
-//           fill: false
-//         }
-//       ]
-//     },
-//     options: {
-//       title: {
-//         display: true,
-//         text: 'World population per region (in millions)'
-//       }
-//     }
-//   });
-  

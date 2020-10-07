@@ -34,6 +34,12 @@ nav img{
 	background: linear-gradient(to right, #3F5EFB, #FC466B); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
+#ResponsiveImagePart > img {
+	width: 100%;
+	height: auto;
+	border-radius: 10px;
+}
+
 
 #goBack{
     border-radius: 20px;
@@ -181,7 +187,14 @@ background: linear-gradient(to right, #f83600, #fe8c00); /* W3C, IE 10+/ Edge, F
         display: flex;
         justify-content: center;
         align-items: center;
-    }
+	}
+	
+	#ResponsiveImagePart > img {
+		width: 90%;
+		height: 250px;
+		border-radius: 10px;
+		margin-top: 14px;
+	}
 
 }
 
@@ -201,7 +214,15 @@ background: linear-gradient(to right, #f83600, #fe8c00); /* W3C, IE 10+/ Edge, F
 
     .table_part {
             overflow-x: scroll;
-        }
+	}
+		
+
+	#ResponsiveImagePart > img {
+		width: 90%;
+		height: 250px;
+		border-radius: 10px;
+		margin-top: 14px;
+	}
 }
 
 
@@ -230,8 +251,17 @@ background: linear-gradient(to right, #f83600, #fe8c00); /* W3C, IE 10+/ Edge, F
     .table_part {
 		overflow-x: scroll;
 	}
+
     .font-table-items{
             font-size: 14px;
-        }
+	}
+	
+
+	#ResponsiveImagePart > img {
+		width: 90%;
+		height: 170px;
+		border-radius: 10px;
+		margin-top: 14px;
+	}
 }
 
