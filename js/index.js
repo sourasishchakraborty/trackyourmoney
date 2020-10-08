@@ -74,7 +74,7 @@ document.querySelector('#signInButton').addEventListener('click', function () {
                 alert("Some error occurred. Please try again.")
             }
         } else {
-            alert("Please verify your email. Then try again.");
+            alert("Please varify your email. Then try again.");
         }
     })
 
@@ -111,7 +111,7 @@ document.querySelector('#signUPButton').addEventListener('click', function () {
 
         userSignUp.sendEmailVerification().then(function() {
 
-            alert(`A verification mail has been sent to ${userSignUp.email}. Please verify and sign in to continue.`);
+            alert(`A varification mail has been sent to ${userSignUp.email}. Please varify and sign in to continue.`);
         }).catch(function(error) {
             alert("Some error occurred. Please try again.");
         });
@@ -178,7 +178,7 @@ document.querySelector('#passwordResetMail').addEventListener('click', function(
 
     auth.sendPasswordResetEmail(emailAddress).then(function() {
         $('#passwordReset').modal('hide');
-        alert("Email is sent. Please set your password through mail.")
+        alert("Email is sent. Please set your passwor through mail.")
     }).catch(function(error) {
         alert("Some error occured. Please try again");
     });

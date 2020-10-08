@@ -19,8 +19,8 @@
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
         <!-- favicon logo  -->
-    <!-- <link rel="shortcut icon" type="image/png" href="images/nav-logo.png"> -->
-    <link rel="shortcut icon" type="image/gif" href="images/money.gif">
+    <link rel="shortcut icon" type="image/png" href="images/nav-logo.png">
+    <!-- <link rel="shortcut icon" type="image/gif" href="images/money.gif"> -->
 </head>
 <body onload="loadingPage()" style="background-color: #F9F9F9;">
     
@@ -43,8 +43,8 @@
     <!-- --------------------------------------------------navbar ------------------------------------------------- -->
     <nav class="navbar navbar-expand-sm navbar-colour d-flex justify-content-between align-items-center">
         <a class="navbar-brand d-flex align-items-center" href="dashboard.html">
-            <!-- <img src="images/nav-logo.png" width="40" height="40" style="border-radius:5px;" class="d-inline-block align-top logo" alt=""> -->
-            <img src="images/money.gif" width="40" height="40" style="border-radius:5px;" class="d-inline-block align-top logo" alt="">
+            <img src="images/nav-logo.png" width="40" height="40" style="border-radius:5px;" class="d-inline-block align-top logo" alt="">
+            <!-- <img src="images/money.gif" width="40" height="40" style="border-radius:5px;" class="d-inline-block align-top logo" alt=""> -->
             <span class="navbar-brand mb-0 h1 text-muted navbar-font">TrackYourMoney</span>
         </a>
 
@@ -90,6 +90,280 @@
         </iframe>
     </div>
     <a href="#" class="close-popup"></a>
+
+
+    <div class="container">
+
+        <!-- current month  -->
+        <div class="row mt-3" id="currentMonthDetails_History">
+            <div class="col-md-3 col-lg-3 col-sm-3 col-6 mt-3">
+                <div class="card bg-warning text-white mt-26 total_transaction_them">
+                    <div class="card-body height-fixed">
+                        <h3 class="font-top-cards text-size-widges">Trans: </h3>
+                        <h1 class="font-top-num text-size-widges" id="current_month_total_trans_number">0</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3 col-sm-3 col-6 mt-3">
+                <div class="card bg-danger text-white mt-26 credit_theme">
+                    <div class="card-body height-fixed">
+                        <h3 class="font-top-cards text-size-widges">Credit: </h3>
+                        <h1 class="font-top-num text-size-widges">Rs. <span id="current_month_total_credit_amount">0</span></h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3 col-sm-3 col-6 mt-3">
+                <div class="card bg-success text-white mt-26 total-earnings">
+                    <div class="card-body height-fixed">
+                        <h3 class="font-top-cards text-size-widges">Debit: </h3>
+                        <h1 class="font-top-num text-size-widges">Rs. <span id="current_month_total_debit_amount">0</span></h1>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-lg-3 col-sm-3 col-6 mt-3" id="">
+                <div class="card bg-success text-white mt-26 current-month-debit-theme">
+                    <div class="card-body height-fixed">
+                        <h3 class="font-top-cards text-size-widges">Savings: </h3>
+                        <h1 class="font-top-num text-size-widges">Rs. <span id="current_month_total_saving_amount">0</span></h1>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+        <!-- last month  -->
+        <div class="row mt-3" id="LastMonthDetails_History">
+            <div class="col-md-3 col-lg-3 col-sm-3 col-6 mt-3">
+                <div class="card bg-warning text-white mt-26 total_transaction_them">
+                    <div class="card-body height-fixed">
+                        <h3 class="font-top-cards text-size-widges">Trans: </h3>
+                        <h1 class="font-top-num text-size-widges" id="last_month_total_trans_number">0</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3 col-sm-3 col-6 mt-3">
+                <div class="card bg-danger text-white mt-26 credit_theme">
+                    <div class="card-body height-fixed">
+                        <h3 class="font-top-cards text-size-widges">Credit: </h3>
+                        <h1 class="font-top-num text-size-widges">Rs. <span id="last_month_total_credit_amount">0</span></h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3 col-sm-3 col-6 mt-3">
+                <div class="card bg-success text-white mt-26 total-earnings">
+                    <div class="card-body height-fixed">
+                        <h3 class="font-top-cards text-size-widges">Debit: </h3>
+                        <h1 class="font-top-num text-size-widges">Rs. <span id="last_month_total_debit_amount">0</span></h1>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-lg-3 col-sm-3 col-6 mt-3" id="">
+                <div class="card bg-success text-white mt-26 current-month-debit-theme">
+                    <div class="card-body height-fixed">
+                        <h3 class="font-top-cards text-size-widges">Savings: </h3>
+                        <h1 class="font-top-num text-size-widges">Rs. <span id="last_month_total_saving_amount">0</span></h1>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+
+        <!-- last last month  -->
+        <div class="row mt-3" id="Last_LastMonthDetails_History">
+            <div class="col-md-3 col-lg-3 col-sm-3 col-6 mt-3">
+                <div class="card bg-warning text-white mt-26 total_transaction_them">
+                    <div class="card-body height-fixed">
+                        <h3 class="font-top-cards text-size-widges">Trans: </h3>
+                        <h1 class="font-top-num text-size-widges" id="last_last_month_total_trans_number">0</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3 col-sm-3 col-6 mt-3">
+                <div class="card bg-danger text-white mt-26 credit_theme">
+                    <div class="card-body height-fixed">
+                        <h3 class="font-top-cards text-size-widges">Credit: </h3>
+                        <h1 class="font-top-num text-size-widges">Rs. <span id="last_last_month_total_credit_amount">0</span></h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3 col-sm-3 col-6 mt-3">
+                <div class="card bg-success text-white mt-26 total-earnings">
+                    <div class="card-body height-fixed">
+                        <h3 class="font-top-cards text-size-widges">Debit: </h3>
+                        <h1 class="font-top-num text-size-widges">Rs. <span id="last_last_month_total_debit_amount">0</span></h1>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-lg-3 col-sm-3 col-6 mt-3" id="">
+                <div class="card bg-success text-white mt-26 current-month-debit-theme">
+                    <div class="card-body height-fixed">
+                        <h3 class="font-top-cards text-size-widges">Savings: </h3>
+                        <h1 class="font-top-num text-size-widges">Rs. <span id="last_last_month_total_saving_amount">0</span></h1>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+
+        <!-- January - June  -->
+        <div class="row mt-3" id="Janu_June_MonthDetails_History">
+            <div class="col-md-3 col-lg-3 col-sm-3 col-6 mt-3">
+                <div class="card bg-warning text-white mt-26 total_transaction_them">
+                    <div class="card-body height-fixed">
+                        <h3 class="font-top-cards text-size-widges">Trans: </h3>
+                        <h1 class="font-top-num text-size-widges" id="january_june_month_total_trans_number">0</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3 col-sm-3 col-6 mt-3">
+                <div class="card bg-danger text-white mt-26 credit_theme">
+                    <div class="card-body height-fixed">
+                        <h3 class="font-top-cards text-size-widges">Credit: </h3>
+                        <h1 class="font-top-num text-size-widges">Rs. <span id="january_june_month_total_credit_amount">0</span></h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3 col-sm-3 col-6 mt-3">
+                <div class="card bg-success text-white mt-26 total-earnings">
+                    <div class="card-body height-fixed">
+                        <h3 class="font-top-cards text-size-widges">Debit: </h3>
+                        <h1 class="font-top-num text-size-widges">Rs. <span id="january_june_month_total_debit_amount">0</span></h1>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-lg-3 col-sm-3 col-6 mt-3" id="">
+                <div class="card bg-success text-white mt-26 current-month-debit-theme">
+                    <div class="card-body height-fixed">
+                        <h3 class="font-top-cards text-size-widges">Savings: </h3>
+                        <h1 class="font-top-num text-size-widges">Rs. <span id="january_june_month_total_saving_amount">0</span></h1>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+
+        <!-- july - december  -->
+        <div class="row mt-3" id="July_December_MonthDetails_History">
+            <div class="col-md-3 col-lg-3 col-sm-3 col-6 mt-3">
+                <div class="card bg-warning text-white mt-26 total_transaction_them">
+                    <div class="card-body height-fixed">
+                        <h3 class="font-top-cards text-size-widges">Trans: </h3>
+                        <h1 class="font-top-num text-size-widges" id="july_december_month_total_trans_number">0</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3 col-sm-3 col-6 mt-3">
+                <div class="card bg-danger text-white mt-26 credit_theme">
+                    <div class="card-body height-fixed">
+                        <h3 class="font-top-cards text-size-widges">Credit: </h3>
+                        <h1 class="font-top-num text-size-widges">Rs. <span id="july_december_month_total_credit_amount">0</span></h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3 col-sm-3 col-6 mt-3">
+                <div class="card bg-success text-white mt-26 total-earnings">
+                    <div class="card-body height-fixed">
+                        <h3 class="font-top-cards text-size-widges">Debit: </h3>
+                        <h1 class="font-top-num text-size-widges">Rs. <span id="july_december_month_total_debit_amount">0</span></h1>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-lg-3 col-sm-3 col-6  mt-3" id="">
+                <div class="card bg-success text-white mt-26 current-month-debit-theme">
+                    <div class="card-body height-fixed">
+                        <h3 class="font-top-cards text-size-widges">Savings: </h3>
+                        <h1 class="font-top-num text-size-widges">Rs. <span id="july_december_month_total_saving_amount">0</span></h1>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+        <!-- last 10 transactions  -->
+        <div class="row mt-3" id="last_10_transactions_MonthDetails_History">
+            <div class="col-md-3 col-lg-3 col-sm-3 col-6 mt-3">
+                <div class="card bg-warning text-white mt-26 total_transaction_them">
+                    <div class="card-body height-fixed">
+                        <h3 class="font-top-cards text-size-widges">Trans: </h3>
+                        <h1 class="font-top-num text-size-widges" id="last_10_transac_month_total_trans_number">0</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3 col-sm-3 col-6 mt-3">
+                <div class="card bg-danger text-white mt-26 credit_theme">
+                    <div class="card-body height-fixed">
+                        <h3 class="font-top-cards text-size-widges">Credit: </h3>
+                        <h1 class="font-top-num text-size-widges">Rs. <span id="last_10_transac_month_total_credit_amount">0</span></h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3 col-sm-3 col-6 mt-3">
+                <div class="card bg-success text-white mt-26 total-earnings">
+                    <div class="card-body height-fixed">
+                        <h3 class="font-top-cards text-size-widges">Debit: </h3>
+                        <h1 class="font-top-num text-size-widges">Rs. <span id="last_10_transac_month_total_debit_amount">0</span></h1>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-lg-3 col-sm-3 col-6 mt-3" id="">
+                <div class="card bg-success text-white mt-26 current-month-debit-theme">
+                    <div class="card-body height-fixed">
+                        <h3 class="font-top-cards text-size-widges">Savings: </h3>
+                        <h1 class="font-top-num text-size-widges">Rs. <span id="last_10_transac_month_total_saving_amount">0</span></h1>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+
+        <!-- All transactions  -->
+        <div class="row mt-3" id="All_trans_transactions_MonthDetails_History">
+            <div class="col-md-3 col-lg-3 col-sm-3 col-6 mt-3">
+                <div class="card bg-warning text-white mt-26 total_transaction_them">
+                    <div class="card-body height-fixed">
+                        <h3 class="font-top-cards text-size-widges">Trans: </h3>
+                        <h1 class="font-top-num text-size-widges" id="All_trans_transac_month_total_trans_number">0</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3 col-sm-3 col-6 mt-3">
+                <div class="card bg-danger text-white mt-26 credit_theme">
+                    <div class="card-body height-fixed">
+                        <h3 class="font-top-cards text-size-widges">Credit: </h3>
+                        <h1 class="font-top-num text-size-widges">Rs. <span id="All_trans_transac_month_total_credit_amount">0</span></h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3 col-sm-3 col-6 mt-3">
+                <div class="card bg-success text-white mt-26 total-earnings">
+                    <div class="card-body height-fixed">
+                        <h3 class="font-top-cards text-size-widges">Debit: </h3>
+                        <h1 class="font-top-num text-size-widges">Rs. <span id="All_trans_transac_month_total_debit_amount">0</span></h1>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-lg-3 col-sm-3 col-6 mt-3" id="">
+                <div class="card bg-success text-white mt-26 current-month-debit-theme">
+                    <div class="card-body height-fixed">
+                        <h3 class="font-top-cards text-size-widges">Savings: </h3>
+                        <h1 class="font-top-num text-size-widges">Rs. <span id="All_trans_transac_month_total_saving_amount">0</span></h1>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
 
     
     <div class="container">
@@ -343,12 +617,6 @@
 
                 </canvas>
             </div>
-
-
-            <!-- <div class="col-md-12">
-                <canvas id="line-chart" width="800" height="450"></canvas>
-
-            </div> -->
         </div>
 
     </div>

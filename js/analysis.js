@@ -133,6 +133,30 @@ ref.on("value", function (snapshot) {
     document.querySelector('#debitDetailsModal').innerHTML = "";
     document.querySelector('#creditDetailsModal').innerHTML = ""; 
 
+
+
+    //More widges
+    let current_month_total_trans_number = 1;
+    let last_month_total_trans_number = 1;
+    let last_last_month_total_trans_number = 1;
+    let jan_june_month_total_trans_number = 1;
+    let july_december_month_total_trans_number = 1;
+
+
+
+    let current_month_total_credit_amount = 0;
+    let last_month_total_credit_amount = 0;
+    let last_last_month_total_credit_amount = 0;
+    let jan_june_month_total_credit_amount = 0;
+    let july_december_month_total_credit_amount = 0;
+
+
+    let current_month_total_debit_amount = 0;
+    let last_month_total_debit_amount = 0;
+    let last_last_month_total_debit_amount = 0;
+    let jan_june_month_total_debit_amount = 0;
+    let july_december_month_total_debit_amount = 0;
+
     for(let id in data){
 
         if (data[id].type === "credit"){
@@ -171,24 +195,70 @@ ref.on("value", function (snapshot) {
         let splitYear = Number(data[id].date.split('-')[0]);
         let splitMonth = Number(data[id].date.split('-')[1]);
 
+
+        // July - December 
         if (splitYear === window.year && splitMonth > 06){
             window.July_Decem_KeyList.push(id);
+
+            july_december_month_total_trans_number++;
+
+            if (data[id].type === "credit"){
+                july_december_month_total_credit_amount += Number(data[id].amount);
+            } else{
+                july_december_month_total_debit_amount += Number(data[id].amount);
+            }
         } 
         
+        // January - June
         if(splitYear === window.year && splitMonth < 06){
             window.Jan_June_KeyList.push(id);
+
+            jan_june_month_total_trans_number++;
+
+            if (data[id].type === "credit"){
+                jan_june_month_total_credit_amount += Number(data[id].amount);
+            } else{
+                jan_june_month_total_debit_amount += Number(data[id].amount);
+            }
         }
 
+        // Current Month
         if(splitYear === window.year && splitMonth === (month + 1)){
             window.currentMonthKeyList.push(id);
+
+            current_month_total_trans_number++;
+
+            if (data[id].type === "credit"){
+                current_month_total_credit_amount += Number(data[id].amount);
+            } else{
+                current_month_total_debit_amount += Number(data[id].amount);
+            }
         }
 
+        // Last Month
         if(splitYear === window.lastYear && splitMonth === (lastMonth + 1)){
             window.lastMonthKeyList.push(id);
+
+            last_month_total_trans_number++;
+
+            if (data[id].type === "credit"){
+                last_month_total_credit_amount += Number(data[id].amount);
+            } else{
+                last_month_total_debit_amount += Number(data[id].amount);
+            }
         }
 
+        // Last last Month
         if(splitYear === window.lastLastYear && splitMonth === (lastLastMonth + 1)){
             window.lastLastMonthKeyList.push(id);
+
+            last_last_month_total_trans_number++;
+
+            if (data[id].type === "credit"){
+                last_last_month_total_credit_amount += Number(data[id].amount);
+            } else{
+                last_last_month_total_debit_amount += Number(data[id].amount);
+            }
         }
 
 
@@ -210,6 +280,65 @@ ref.on("value", function (snapshot) {
 
 
        }
+
+        // Current month
+        if (current_month_total_trans_number === 1){
+            document.querySelector('#current_month_total_trans_number').textContent = 0;
+        } else {
+            document.querySelector('#current_month_total_trans_number').textContent = current_month_total_trans_number - 1;
+        }
+
+        document.querySelector('#current_month_total_credit_amount').textContent = current_month_total_credit_amount;
+        document.querySelector('#current_month_total_debit_amount').textContent = current_month_total_debit_amount;
+        document.querySelector('#current_month_total_saving_amount').textContent = current_month_total_credit_amount - current_month_total_debit_amount;
+
+
+        // Last month
+        if (last_month_total_trans_number === 1){
+            document.querySelector('#last_month_total_trans_number').textContent = 0;
+        } else {
+            document.querySelector('#last_month_total_trans_number').textContent = last_month_total_trans_number - 1;
+        }
+
+        document.querySelector('#last_month_total_credit_amount').textContent = last_month_total_credit_amount;
+        document.querySelector('#last_month_total_debit_amount').textContent = last_month_total_debit_amount;
+        document.querySelector('#last_month_total_saving_amount').textContent = last_month_total_credit_amount - last_month_total_debit_amount;
+
+
+        // Last last Month
+        if (last_last_month_total_trans_number === 1){
+            document.querySelector('#last_last_month_total_trans_number').textContent = 0;
+        } else {
+            document.querySelector('#last_last_month_total_trans_number').textContent = last_last_month_total_trans_number - 1;
+        }
+
+        document.querySelector('#last_last_month_total_credit_amount').textContent = last_last_month_total_credit_amount;
+        document.querySelector('#last_last_month_total_debit_amount').textContent = last_last_month_total_debit_amount;
+        document.querySelector('#last_last_month_total_saving_amount').textContent = last_last_month_total_credit_amount - last_last_month_total_debit_amount;
+
+
+        // January - June
+        if (jan_june_month_total_trans_number === 1){
+            document.querySelector('#january_june_month_total_trans_number').textContent = 0;
+        } else {
+            document.querySelector('#january_june_month_total_trans_number').textContent = jan_june_month_total_trans_number - 1;
+        }
+
+        document.querySelector('#january_june_month_total_credit_amount').textContent = jan_june_month_total_credit_amount;
+        document.querySelector('#january_june_month_total_debit_amount').textContent = jan_june_month_total_debit_amount;
+        document.querySelector('#january_june_month_total_saving_amount').textContent = jan_june_month_total_credit_amount - jan_june_month_total_debit_amount;
+
+
+        // July - December
+        if (july_december_month_total_trans_number === 1){
+            document.querySelector('#july_december_month_total_trans_number').textContent = 0;
+        } else {
+            document.querySelector('#july_december_month_total_trans_number').textContent = july_december_month_total_trans_number - 1;
+        }
+
+        document.querySelector('#july_december_month_total_credit_amount').textContent = july_december_month_total_credit_amount;
+        document.querySelector('#july_december_month_total_debit_amount').textContent = july_december_month_total_debit_amount;
+        document.querySelector('#july_december_month_total_saving_amount').textContent = july_december_month_total_credit_amount - july_december_month_total_debit_amount;
 
 
     let pieChart = document.querySelector('#CategoryPieChart_All').getContext('2d')
@@ -268,6 +397,21 @@ ref.on("value", function (snapshot) {
     let ifCounter = 1
 
     let last10keys = []
+
+
+
+    // for wedges value
+    let all_month_total_trans_number = 1;
+    let last_10_trans_total_trans_number = 1;
+
+
+    let all_month_total_credit_amount = 0;
+    let last_10_trans_total_credit_amount = 0;
+
+
+
+    let all_month_total_debit_amount = 0;
+    let last_10_trans_total_debit_amount = 0;
 
 
 
@@ -717,6 +861,20 @@ ref.on("value", function (snapshot) {
                 </tr>`;
                 ifCounter++;
 
+
+
+                // for widges
+                last_10_trans_total_trans_number++;
+
+                if (data[id].type === "credit"){
+                    last_10_trans_total_credit_amount += Number(data[id].amount);
+                } else{
+                    last_10_trans_total_debit_amount += Number(data[id].amount);
+                }
+
+
+
+
                 // For bar graph
                 if (data[id].type === 'credit'){
                     last_10_trans_Day_Graph_Amount_List_Credit[day_value] += Number(data[id].amount);
@@ -782,6 +940,18 @@ ref.on("value", function (snapshot) {
                     <td><a href="#" style="color: #1d2124;" data-toggle="modal" data-target=".editModal"><i class="fas fa-edit green-shade" id="storeID" data-id="${id}"></i></a></td>
                     <td><a href="#" style="color: #1d2124;" data-toggle="modal" data-target=".deleteModal"><i class="fas fa-trash red" id="deleteID" data-id="${id}"></i></a></td>
                 </tr>`;
+
+
+
+
+            // for widges
+            last_10_trans_total_trans_number++;
+
+            if (data[id].type === "credit"){
+                last_10_trans_total_credit_amount += Number(data[id].amount);
+            } else{
+                last_10_trans_total_debit_amount += Number(data[id].amount);
+            }
         }
         
 
@@ -800,6 +970,22 @@ ref.on("value", function (snapshot) {
                 <td><a href="#" style="color: #1d2124;"><i class="fas fa-times-circle red"></i></a></td>
                 <td><a href="#" style="color: #1d2124;"><i class="fas fa-times-circle red"></i></a></td>
             </tr>`;
+
+
+
+            // for widges
+            all_month_total_trans_number++;
+
+            if (data[id].type === "credit"){
+                all_month_total_credit_amount += Number(data[id].amount);
+            } else{
+                all_month_total_debit_amount += Number(data[id].amount);
+            }
+
+
+
+
+
 
             // For bar graph
             if (data[id].type === 'credit'){
@@ -840,6 +1026,38 @@ ref.on("value", function (snapshot) {
         mainCount++;
 
     }
+
+
+
+
+
+    // for widges---------------------->
+
+
+    // All transactions
+    if (all_month_total_trans_number === 1){
+        document.querySelector('#All_trans_transac_month_total_trans_number').textContent = 0;
+    } else {
+        document.querySelector('#All_trans_transac_month_total_trans_number').textContent = all_month_total_trans_number - 1;
+    }
+
+    document.querySelector('#All_trans_transac_month_total_credit_amount').textContent = all_month_total_credit_amount;
+    document.querySelector('#All_trans_transac_month_total_debit_amount').textContent = all_month_total_debit_amount;
+    document.querySelector('#All_trans_transac_month_total_saving_amount').textContent = all_month_total_credit_amount - all_month_total_debit_amount;
+
+
+
+
+    // last 10 transactions
+    if (last_10_trans_total_trans_number === 1){
+        document.querySelector('#last_10_transac_month_total_trans_number').textContent = 0;
+    } else {
+        document.querySelector('#last_10_transac_month_total_trans_number').textContent = last_10_trans_total_trans_number - 1;
+    }
+
+    document.querySelector('#last_10_transac_month_total_credit_amount').textContent = last_10_trans_total_credit_amount;
+    document.querySelector('#last_10_transac_month_total_debit_amount').textContent = last_10_trans_total_debit_amount;
+    document.querySelector('#last_10_transac_month_total_saving_amount').textContent = last_10_trans_total_credit_amount - last_10_trans_total_debit_amount;
 
 
 
@@ -1575,7 +1793,8 @@ ref.on("value", function (snapshot) {
     })
 })
 
-// show default transaction history table
+// show default transaction history table & widges-------------------->
+// table
 document.querySelector('#CurrentMonthTransactionShow').style.display = "";
 
 document.querySelector("#LastMonthTransactionShow").style.display = 'none';
@@ -1584,6 +1803,21 @@ document.querySelector('#Jan_JuneTransactionShow').style.display = 'none';
 document.querySelector('#July_DecemTransactionShow').style.display = 'none';
 document.querySelector('#allTransactionShow').style.display = 'none';
 document.querySelector("#last10TransactionShow").style.display = 'none';
+
+
+// widges
+document.querySelector('#currentMonthDetails_History').style.display = '';
+
+
+document.querySelector('#LastMonthDetails_History').style.display = 'none';
+document.querySelector('#Last_LastMonthDetails_History').style.display = 'none';
+document.querySelector('#Janu_June_MonthDetails_History').style.display = 'none';
+document.querySelector('#Janu_June_MonthDetails_History').style.display = 'none';
+document.querySelector('#July_December_MonthDetails_History').style.display = 'none';
+document.querySelector('#All_trans_transactions_MonthDetails_History').style.display = 'none';
+document.querySelector('#last_10_transactions_MonthDetails_History').style.display = 'none';
+
+
 
 
 //dropdown selection ---> Current Month
@@ -1597,6 +1831,19 @@ document.querySelector("#current_Month").addEventListener('click', function(){
     document.querySelector('#July_DecemTransactionShow').style.display = 'none';
     document.querySelector('#allTransactionShow').style.display = 'none';
     document.querySelector("#last10TransactionShow").style.display = 'none';
+
+
+
+    document.querySelector('#currentMonthDetails_History').style.display = '';
+
+
+    document.querySelector('#LastMonthDetails_History').style.display = 'none';
+    document.querySelector('#Last_LastMonthDetails_History').style.display = 'none';
+    document.querySelector('#Janu_June_MonthDetails_History').style.display = 'none';
+    document.querySelector('#Janu_June_MonthDetails_History').style.display = 'none';
+    document.querySelector('#July_December_MonthDetails_History').style.display = 'none';
+    document.querySelector('#All_trans_transactions_MonthDetails_History').style.display = 'none';
+    document.querySelector('#last_10_transactions_MonthDetails_History').style.display = 'none';
 
 })
 
@@ -1612,6 +1859,18 @@ document.querySelector('#Last_Month').addEventListener('click', function(){
     document.querySelector('#July_DecemTransactionShow').style.display = 'none';
     document.querySelector('#allTransactionShow').style.display = 'none';
     document.querySelector("#last10TransactionShow").style.display = 'none';
+
+
+    document.querySelector('#LastMonthDetails_History').style.display = '';
+
+
+    document.querySelector('#currentMonthDetails_History').style.display = 'none';
+    document.querySelector('#Last_LastMonthDetails_History').style.display = 'none';
+    document.querySelector('#Janu_June_MonthDetails_History').style.display = 'none';
+    document.querySelector('#Janu_June_MonthDetails_History').style.display = 'none';
+    document.querySelector('#July_December_MonthDetails_History').style.display = 'none';
+    document.querySelector('#All_trans_transactions_MonthDetails_History').style.display = 'none';
+    document.querySelector('#last_10_transactions_MonthDetails_History').style.display = 'none';
 })
 
 
@@ -1626,6 +1885,19 @@ document.querySelector('#Last_last_Month').addEventListener('click', function(){
     document.querySelector('#July_DecemTransactionShow').style.display = 'none';
     document.querySelector('#allTransactionShow').style.display = 'none';
     document.querySelector("#last10TransactionShow").style.display = 'none';
+
+
+
+    document.querySelector('#Last_LastMonthDetails_History').style.display = '';
+
+
+    document.querySelector('#currentMonthDetails_History').style.display = 'none';
+    document.querySelector('#LastMonthDetails_History').style.display = 'none';
+    document.querySelector('#Janu_June_MonthDetails_History').style.display = 'none';
+    document.querySelector('#Janu_June_MonthDetails_History').style.display = 'none';
+    document.querySelector('#July_December_MonthDetails_History').style.display = 'none';
+    document.querySelector('#All_trans_transactions_MonthDetails_History').style.display = 'none';
+    document.querySelector('#last_10_transactions_MonthDetails_History').style.display = 'none';
 })
 
 
@@ -1640,9 +1912,21 @@ document.querySelector('#Jan_Jun').addEventListener('click', function(){
     document.querySelector("#LastMonthTransactionShow").style.display = 'none';
     document.querySelector("#LastLastMonthTransactionShow").style.display = 'none';
     document.querySelector("#last10TransactionShow").style.display = 'none';
+
+
+    document.querySelector('#Janu_June_MonthDetails_History').style.display = '';
+
+
+    document.querySelector('#currentMonthDetails_History').style.display = 'none';
+    document.querySelector('#LastMonthDetails_History').style.display = 'none';
+    document.querySelector('#Last_LastMonthDetails_History').style.display = 'none';
+    document.querySelector('#July_December_MonthDetails_History').style.display = 'none';  
+    document.querySelector('#All_trans_transactions_MonthDetails_History').style.display = 'none';
+    document.querySelector('#last_10_transactions_MonthDetails_History').style.display = 'none';  
+
 })
 
-// dropdown selections--> Julu to December
+// dropdown selections--> July to December
 document.querySelector('#Jul_Decem').addEventListener('click', function () {
 
     document.querySelector('#July_DecemTransactionShow').style.display = '';
@@ -1653,6 +1937,18 @@ document.querySelector('#Jul_Decem').addEventListener('click', function () {
     document.querySelector("#LastMonthTransactionShow").style.display = 'none';
     document.querySelector("#LastLastMonthTransactionShow").style.display = 'none';
     document.querySelector("#last10TransactionShow").style.display = 'none';
+
+
+
+    document.querySelector('#July_December_MonthDetails_History').style.display = '';
+
+
+    document.querySelector('#currentMonthDetails_History').style.display = 'none';
+    document.querySelector('#LastMonthDetails_History').style.display = 'none';
+    document.querySelector('#Last_LastMonthDetails_History').style.display = 'none';
+    document.querySelector('#Janu_June_MonthDetails_History').style.display = 'none';
+    document.querySelector('#All_trans_transactions_MonthDetails_History').style.display = 'none';
+    document.querySelector('#last_10_transactions_MonthDetails_History').style.display = 'none';
 })
 
 
@@ -1669,6 +1965,15 @@ document.querySelector("#last10TransDetails").addEventListener('click', function
     document.querySelector('#allTransactionShow').style.display = 'none';
 
 
+    document.querySelector('#last_10_transactions_MonthDetails_History').style.display = '';
+
+
+    document.querySelector('#currentMonthDetails_History').style.display = 'none';
+    document.querySelector('#LastMonthDetails_History').style.display = 'none';
+    document.querySelector('#Last_LastMonthDetails_History').style.display = 'none';
+    document.querySelector('#Janu_June_MonthDetails_History').style.display = 'none';
+    document.querySelector('#All_trans_transactions_MonthDetails_History').style.display = 'none';
+    document.querySelector('#July_December_MonthDetails_History').style.display = 'none';
 
 })
 
@@ -1684,6 +1989,18 @@ document.querySelector('#allTransDetails').addEventListener('click', function(){
     document.querySelector("#LastMonthTransactionShow").style.display = 'none';
     document.querySelector("#LastLastMonthTransactionShow").style.display = 'none';
     document.querySelector("#last10TransactionShow").style.display = 'none';
+
+
+
+    document.querySelector('#All_trans_transactions_MonthDetails_History').style.display = '';
+
+
+    document.querySelector('#currentMonthDetails_History').style.display = 'none';
+    document.querySelector('#LastMonthDetails_History').style.display = 'none';
+    document.querySelector('#Last_LastMonthDetails_History').style.display = 'none';
+    document.querySelector('#Janu_June_MonthDetails_History').style.display = 'none';
+    document.querySelector('#July_December_MonthDetails_History').style.display = 'none';
+    document.querySelector('#last_10_transactions_MonthDetails_History').style.display = 'none';
 })
 
 
