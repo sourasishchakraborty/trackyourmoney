@@ -134,12 +134,12 @@ iframe{
 /*#fourth {
     animation: shake 0.7s 1.5s;
 }*/
-#fourth img{
+/*#fourth img{
     animation: shakeonload 0.7 1.5s;
-}
+}*/
 
 #fourth img:hover{
-    animation: shake 0.7s 0.0s;
+    animation: shake 1.0 1.5s;
 }
 @keyframes shake {
     0% {

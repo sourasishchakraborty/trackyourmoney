@@ -57,22 +57,27 @@ document.querySelector('#signInButton').addEventListener('click', function () {
     });
 
 
-
-    // for fetching uid from firebase.auth().
-
     firebase.auth().onAuthStateChanged((userlogin) => {
-        uid = userlogin.uid;
 
-        if (uid !== null) {
-            localStorage.setItem('UserId', uid);
-            //localStorage.setItem('name',null);
-            //localStorage.setItem('picture',null);
-            localStorage.setItem('provider',"email");
+        console.log(userlogin.emailVerified);
 
-            window.location.href = 'dashboard.html';
+        if(userlogin.emailVerified === true) {
+            uid = userlogin.uid;
+
+            if (uid !== null) {
+                localStorage.setItem('UserId', uid);
+
+                localStorage.setItem('provider',"email");
+
+                window.location.href = 'dashboard.html';
+            } else {
+                alert("Some error occurred. Please try again.")
+            }
+        } else {
+            alert("Please verify your email. Then try again.");
         }
-        
-    });
+    })
+
 })
 
 
@@ -89,12 +94,6 @@ document.querySelector('#signUPButton').addEventListener('click', function () {
         // Handle Errors here.
         var errorCodeSignUp = error.code;
         var errorMessageSignUp = error.message;
-
-        // alert("Some error occurred. Please try again. 1");
-
-        //console.log(errorCodeSignUp);
-        //console.log(errorMessageSignUp);
-        //alert(errorCodeSignUp);
         alert(errorMessageSignUp);
 
         if(errorCodeSignUp.split('/')[1] === "email-already-in-use"){
@@ -106,22 +105,16 @@ document.querySelector('#signUPButton').addEventListener('click', function () {
         }
 
 
-
     });
 
-
     firebase.auth().onAuthStateChanged((userSignUp) => {
-        uid = userSignUp.uid;
 
-        if (uid != null){
-            localStorage.setItem('UserId', uid);
-           // localStorage.setItem('name',null);
-            //localStorage.setItem('picture',null);
-            localStorage.setItem('provider',"email");
+        userSignUp.sendEmailVerification().then(function() {
 
-            window.location.href = 'dashboard.html';
-        }
-        
+            alert(`A verification mail has been sent to ${userSignUp.email}. Please verify and sign in to continue.`);
+        }).catch(function(error) {
+            alert("Some error occurred. Please try again.");
+        });
     })
 
 })
@@ -169,4 +162,25 @@ document.querySelector("#facebook").addEventListener('click', function(){
         alert("Some error occured. Please try again or sign in with different method.");
       });
       
+})
+
+
+
+
+
+// forgot password set
+document.querySelector('#passwordResetMail').addEventListener('click', function() {
+
+    let userPasswordSetEmail = document.querySelector('#PasswordSetEmail').value;
+
+    var auth = firebase.auth();
+    var emailAddress = userPasswordSetEmail;
+
+    auth.sendPasswordResetEmail(emailAddress).then(function() {
+        $('#passwordReset').modal('hide');
+        alert("Email is sent. Please set your password through mail.")
+    }).catch(function(error) {
+        alert("Some error occured. Please try again");
+    });
+
 })

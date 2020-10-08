@@ -343,12 +343,13 @@ ref.on("value", function (snapshot) {
 
     for (let id in data){
 
-        let userYear = data[id].date.split('-')[0];
-        let userMonth = data[id].date.split('-')[1];
-        let userDay = data[id].date.split('-')[2];
+        let userYear = Number(data[id].date.split('-')[0]);
+        let userMonth = Number(data[id].date.split('-')[1]) - 1;
+        let userDay = Number(data[id].date.split('-')[2]);
 
         let newDate_Graph = new Date(userYear, userMonth, userDay);
         let day_value = newDate_Graph.getDay();
+
 
         // January - June Transaction
         if (Jan_June_KeyList.includes(id)){

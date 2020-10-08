@@ -24,6 +24,17 @@ nav img{
     margin: 5px;
 }
 
+#passwordsetlink{
+    color: rgb(88, 88, 214);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+#passwordsetlink:hover{
+    color: rgb(24, 24, 173);
+    cursor: pointer;
+}
+
 .btn-color{
     background: #24C6DC;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #514A9D, #24C6DC);  /* Chrome 10-25, Safari 5.1-6 */
